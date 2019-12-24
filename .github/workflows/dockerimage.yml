@@ -14,4 +14,16 @@ jobs:
       env:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      run: docker build . --file Dockerfile --tag portfolio:latest; echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin; docker tag portfolio $DOCKER_HUB_USERNAME/portfolio:latest; docker push $DOCKER_HUB_USERNAME/portfolio:latest
+      run: docker build . --file Dockerfile --tag portfolio:latest; \
+            echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin; \
+            docker tag portfolio $DOCKER_HUB_USERNAME/portfolio:latest; \
+            docker push $DOCKER_HUB_USERNAME/portfolio:latest
+            
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to davidkopala.com
+      env:
+        SSH_KEY: ${{ secrets.SERVER_KEY }}
+      run: echo $SSH_KEY | ssh -i /dev/stdin ubuntu@davidkopala.com "mkdir ~/github; mkdir ~/github/test"
+
