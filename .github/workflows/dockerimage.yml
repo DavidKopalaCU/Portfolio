@@ -25,5 +25,7 @@ jobs:
     - name: Deploy to davidkopala.com
       env:
         SSH_KEY: ${{ secrets.SERVER_KEY }}
-      run: echo $SSH_KEY | ssh -i /dev/stdin ubuntu@davidkopala.com "mkdir ~/github; mkdir ~/github/test"
+      run: echo $SSH_KEY > key.pem; \
+            chmod 400 key.pem; \
+            ssh -q -i key.pem ubuntu@davidkopala.com "mkdir ~/github; mkdir ~/github/test";
 
