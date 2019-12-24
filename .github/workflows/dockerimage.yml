@@ -28,7 +28,7 @@ jobs:
       with:
         host: davidkopala.com
         username: ubuntu
-        key: ${{ secrets.SERVERKEY }}
+        key: ${{ secrets.SERVER_KEY }}
         script: |
           whoami
           ls -al
