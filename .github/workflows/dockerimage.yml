@@ -28,6 +28,7 @@ jobs:
           ssh-private-key: ${{ secrets.SERVER_KEY }}
       - name: Deploy to Server
         run: |
+          ssh-add -l
           ssh -A ubuntu@davidkopala.com "mkdir ~/github"
         
         
