@@ -15,6 +15,7 @@ jobs:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
       run: |
+        cat src/App.js;
         docker build . --file Dockerfile --tag portfolio:latest; 
         echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin;
         docker tag portfolio $DOCKER_HUB_USERNAME/portfolio:latest;
