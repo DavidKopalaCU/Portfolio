@@ -19,18 +19,15 @@ jobs:
         echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin;
         docker tag portfolio $DOCKER_HUB_USERNAME/portfolio:latest;
         docker push $DOCKER_HUB_USERNAME/portfolio:latest
-            
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Deplay to server
+        
+    - name: Deploy to server
       uses: appleboy/ssh-action@master
       with:
         host: davidkopala.com
         username: ubuntu
         key: ${{ secrets.SERVER_KEY }}
         script: |
-          whoami
-          ls -al
+          docker pull davidkopala/portfolio
+          docker restart portfolio
         
         
