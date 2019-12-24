@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          CI/CD Testing!
+          <code>CI/CD</code> Testing Part 2!
         </p>
         <a
           className="App-link"
